@@ -6,7 +6,7 @@ const taskSchema = new Schema({
   task: String,
   createdAt: Date,
   updateAt: Date,
-  finished: Boolean
+  finished: Boolean,
 });
 
 const Task = mongoose.model('Task', taskSchema);
