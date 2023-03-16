@@ -16,7 +16,15 @@ const userController = {
     } catch (error) {
       console.log(error);
     }
-  },  
-}
+  },
+  getAll: async (req, res) => {
+    try {
+      const users = await UserModel.find();
+      res.status(200).json(users);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
 
 module.exports = userController;
