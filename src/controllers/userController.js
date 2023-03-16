@@ -62,10 +62,34 @@ delete: async (req, res) => {
 
     const deleteUser = await UserModel.findByIdAndDelete(id);
 
-    res.status(200).json('User deleted!')
+    res.status(200).json({deleteUser, msg: 'User deleted!'})
   } catch (error) {
     console.log(error); 
   }
+},
+
+update: async (req, res) => {
+  const id = req.params.id;
+  const test = ObjectId.isValid(id);
+  //Verificando se o ObjectID é válido
+  if(!test) {
+    return res.status(400).json('Invalid ID!');
+
+  }
+  const findUser = await UserModel.findById(id);
+
+  if(!findUser) {
+    return res.status(404).json('User not found!');
+  }
+  const user = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  const updateUser = await UserModel.findByIdAndUpdate(id, user);
+
+  res.status(200).json({user, msg: 'User updated!'})
 },
 
 };

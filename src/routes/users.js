@@ -10,4 +10,6 @@ router.get('/:id', (req, res) => userController.get(req, res));
 
 router.post('/', async (req, res) => userController.create(req, res));
 
+router.put('/:id', (req, res) => userController.update(req, res));
+
 module.exports = router;
