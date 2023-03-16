@@ -16,6 +16,7 @@ const taskController = {
       console.log(error);
     }
   },
+
   getAll: async (req, res) => {
     try {
       const tasks = await TaskModel.find();
@@ -24,6 +25,7 @@ const taskController = {
       console.log(error);
     }
   },
+
   get: async (req, res) => {
     try {
       const id = req.params.id;
@@ -33,17 +35,18 @@ const taskController = {
         return res.status(400).json('Invalid ID!');
 
       }
-      const task = await TaskModel.findById(id);
+      const findTask = await TaskModel.findById(id);
 
-      if(!task) {
+      if(!findTask) {
         return res.status(404).json('Task not found!');
       }
 
-      res.json(task);      
+      res.json(findTask);      
     } catch (error) {
       console.log(error); 
     }
   },
+
   delete: async (req, res) => {
     try {
       const id = req.params.id;
@@ -53,18 +56,41 @@ const taskController = {
         return res.status(400).json('Invalid ID!');
   
       }
-      const user = await TaskModel.findById(id);
+      const findTask = await TaskModel.findById(id);
   
-      if(!user) {
+      if(!findTask) {
         return res.status(404).json('Task not found!');
       }
   
-      const deleteUser = await TaskModel.findByIdAndDelete(id);
+      const deleteTask = await TaskModel.findByIdAndDelete(id);
   
-      res.status(200).json({deleteUser, msg: 'Task deleted!'})
+      res.status(200).json({deleteTask, msg: 'Task deleted!'})
     } catch (error) {
       console.log(error); 
     }
+  },
+
+  update: async (req, res) => {
+    const id = req.params.id;
+    const test = ObjectId.isValid(id);
+    //Verificando se o ObjectID é válido
+    if(!test) {
+      return res.status(400).json('Invalid ID!');
+
+    }
+    const findTask = await TaskModel.findById(id);
+
+    if(!findTask) {
+      return res.status(404).json('Task not found!');
+    }
+    const task = {
+      task: req.body.task,
+      finished: req.body.finished,
+    };
+
+    const updateTask = await TaskModel.findByIdAndUpdate(id, task);
+
+    res.status(200).json({task, msg: 'Task updated!'})
   },
 };
 

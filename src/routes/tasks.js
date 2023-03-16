@@ -10,4 +10,6 @@ router.get('/:id', (req, res) => taskController.get(req, res));
 
 router.post('/', async (req, res) => taskController.create(req, res));
 
+router.put('/:id', (req, res) => taskController.update(req, res));
+
 module.exports = router;
