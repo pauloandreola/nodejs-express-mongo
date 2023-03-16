@@ -4,8 +4,8 @@ const { Schema } = mongoose;
 
 const taskSchema = new Schema({
   task: String,
-  createdAt: NativeDate,
-  updateAt: NativeDate,
+  createdAt: Date,
+  updateAt: Date,
   finished: Boolean
 });
 

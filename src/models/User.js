@@ -1,15 +1,13 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  id: ObjectId,
   name: String,
   email: String,
   password: String,
-  createdAt: NativeDate,
-  updateAt: NativeDate,
+  createdAt: Date,
+  updateAt: Date,
 });
 
 const User = mongoose.model('User', userSchema);

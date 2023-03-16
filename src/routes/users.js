@@ -1,20 +1,17 @@
-const express = require('express');
+const router = require('express').Router();
 
-const app = express();
+const userController = require('../controllers/userController');
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.status(200).json({msg: 'Test'})
 })
 
-app.post('/', async (req, res) => {
-  const { name, age, email, password } = req.body;
-  const person = { name, age, email, password }
+router.post('/', async (req, res) => {
+  const { name, email, password } = req.body;
+  const person = { name, email, password }
 
   if(!name) {
     res.status(404).json('Name not found!')
-  }
-  if(!age) {
-    res.status(404).json('Age not found!')
   }
   if(!email) {
     res.status(404).json('Email not found!')
@@ -31,3 +28,5 @@ app.post('/', async (req, res) => {
     res.status(201).json('User created!');
 
 })
+
+module.exports = router;
