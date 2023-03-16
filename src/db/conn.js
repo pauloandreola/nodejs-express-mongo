@@ -6,7 +6,7 @@ async function main() {
 
     mongoose.set('strictQuery', true);
 
-    await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.usyc5sw.mongodb.net/bancoNodejsExpressMongo?retryWrites=true&w=majority`)
+    await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.usyc5sw.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
 
     console.log('MongoDB Altas connected!')
 
