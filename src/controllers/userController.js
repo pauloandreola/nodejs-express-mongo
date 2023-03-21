@@ -4,11 +4,25 @@ const { User: UserModel } = require('../models/User');
 const userController = {
   create: async(req, res) => {
     try {
+
       const user = {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
       };
+
+      if(!user.name) {
+        res.status(404).json('Name not found!')
+      }
+
+      if(!user.email) {
+        res.status(404).json('Email not found!')
+      }
+
+      if(!user.password) {
+        res.status(404).json('Password not found!')
+      }
+
 
       const response = await UserModel.create(user);
       res.status(201).json({ response, msg: 'User created'});
