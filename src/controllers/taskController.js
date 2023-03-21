@@ -9,6 +9,10 @@ const taskController = {
         finished: req.body.finished,
       };
 
+      if(!task.task) {
+        res.status(404).json('Task not found!')
+      }
+
       const response = await TaskModel.create(task);
       res.status(201).json({ response, msg: 'Task created'});
 
