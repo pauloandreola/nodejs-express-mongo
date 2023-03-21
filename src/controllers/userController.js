@@ -9,11 +9,11 @@ const userController = {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        confpass: req.body.confpass,
       };
 
       if(!user.name) {
         return res.status(404).json('Name not found!');
-        
       }
 
       if(!user.email) {
@@ -24,6 +24,10 @@ const userController = {
         return res.status(404).json('Password not found!')
       }
 
+      if(user.password != user.confpass) {
+        return res.status(404).json('Password is not the same!')
+      }
+
       const response = await UserModel.create(user);
       return res.status(201).json({ response, msg: 'User created'});
 
@@ -32,6 +36,7 @@ const userController = {
 
     }
   },
+
   getAll: async (req, res) => {
     try {
       const users = await UserModel.find();
@@ -40,6 +45,7 @@ const userController = {
       console.log(error);
     }
   },
+
   get: async (req, res) => {
     try {
       const id = req.params.id;
@@ -47,7 +53,6 @@ const userController = {
       //Verificando se o ObjectID é válido
       if(!test) {
         return res.status(400).json('Invalid ID!');
-
       }
       const user = await UserModel.findById(id);
 
@@ -60,6 +65,7 @@ const userController = {
       console.log(error); 
     }
   },
+
 delete: async (req, res) => {
   try {
     const id = req.params.id;
