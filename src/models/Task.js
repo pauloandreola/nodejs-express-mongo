@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
-  task: String,
+  title: String,
+  description: String,
   createdAt: Date,
   updateAt: Date,
   finished: Boolean,
