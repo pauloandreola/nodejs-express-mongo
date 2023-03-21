@@ -5,8 +5,9 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
     "mongodb": "^5.1.0",
     "mongoose": "^7.0.2",
     "nodemon": "^2.0.21"
+  },
+  "devDependencies": {
+    "vitest": "^0.29.7"
   }
 }
