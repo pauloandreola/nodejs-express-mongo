@@ -12,23 +12,24 @@ const userController = {
       };
 
       if(!user.name) {
-        res.status(404).json('Name not found!')
+        return res.status(404).json('Name not found!');
+        
       }
 
       if(!user.email) {
-        res.status(404).json('Email not found!')
+        return res.status(404).json('Email not found!')
       }
 
       if(!user.password) {
-        res.status(404).json('Password not found!')
+        return res.status(404).json('Password not found!')
       }
 
-
       const response = await UserModel.create(user);
-      res.status(201).json({ response, msg: 'User created'});
+      return res.status(201).json({ response, msg: 'User created'});
 
     } catch (error) {
       console.log(error);
+
     }
   },
   getAll: async (req, res) => {
