@@ -5,16 +5,25 @@ const taskController = {
   create: async(req, res) => {
     try {
       const task = {
-        task: req.body.task,
+        title: req.body.title,
+        description: req.body.description,
         finished: req.body.finished,
       };
 
-      if(!task.task) {
-        res.status(404).json('Task not found!')
+      if(!task.title) {
+        return res.status(404).json('Tittle field in blank!');
+      }
+
+      if(!task.description) {
+        return res.status(404).json('Description field in blank!');
+      }
+
+      if(!task.description) {
+        return res.status(404).json('Finished field in blank!');
       }
 
       const response = await TaskModel.create(task);
-      res.status(201).json({ response, msg: 'Task created'});
+      return res.status(201).json({ response, msg: 'Task created'});
 
     } catch (error) {
       console.log(error);
@@ -88,7 +97,8 @@ const taskController = {
       return res.status(404).json('Task not found!');
     }
     const task = {
-      task: req.body.task,
+      title: req.body.title,
+      description: req.body.description,
       finished: req.body.finished,
     };
 
